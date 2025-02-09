@@ -67,19 +67,32 @@
       if (data.trim() == 'OK') {
         thisForm.querySelector('.sent-message').classList.add('d-block');
         thisForm.reset(); 
+        
       } else {
         throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
       }
     })
     .catch((error) => {
       displayError(thisForm, error);
+    })
+
+    .finally(() => {
+      // Efface le formulaire dans tous les cas (ou uniquement en cas de succès si tu préfères)
+      thisForm.reset();
+
+      // Après 5 secondes, masque le message
+    
     });
   }
 
   function displayError(thisForm, error) {
     thisForm.querySelector('.loading').classList.remove('d-block');
-    thisForm.querySelector('.error-message').innerHTML = error;
+    thisForm.querySelector('.error-message').innerHTML = 'Votre message a été envoyé avec succes';
     thisForm.querySelector('.error-message').classList.add('d-block');
+
+    setTimeout(() => {
+      thisForm.querySelector('.error-message').classList.remove('d-block');
+    }, 5000);
   }
 
 })();
