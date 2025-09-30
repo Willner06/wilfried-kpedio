@@ -1,0 +1,172 @@
+/*--------------------------------------------------------------
+# Font & Color Variables
+# Help: https://bootstrapmade.com/color-system/
+--------------------------------------------------------------*/
+/* ... (Vos variables Fonts) ... */
+
+/* Global Colors - Thème CLAIR (Défaut) */
+:root { 
+  --background-color: #ffffff; /* Fond général */
+  --default-color: #272829; /* Texte général */
+  --heading-color: #45505b; /* Titres */
+  --accent-color: #f021b2; /* Rose accent */
+  --surface-color: #ffffff; /* Fond de cartes/boîtes */
+  --contrast-color: #ffffff; /* Texte sur fond d'accent */
+  /* Variable pour l'ombre - essentielle pour le mode sombre */
+  --box-shadow-color: rgba(0, 0, 0, 0.1); 
+  /* Variable pour les bordures/lignes claires */
+  --border-color-light: color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+/* Nav Menu Colors - CLAIR (Défaut) */
+:root {
+  --nav-color: #45505b;
+  --nav-hover-color: #f021b2;
+  --nav-mobile-background-color: #ffffff;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #212529;
+  --nav-dropdown-hover-color: #f021b2;
+}
+
+/* ======================================================= */
+/* --- Thème Sombre (Override des variables) --- */
+/* ======================================================= */
+body.dark-mode {
+  /* Global Colors */
+  --background-color: #121212; /* Un gris très foncé */
+  --default-color: #e6e6e6; /* Texte clair */
+  --heading-color: #ffffff; /* Titres blancs */
+  --accent-color: #ff52d9; /* Un accent rose légèrement plus clair pour le contraste */
+  --surface-color: #1e1e1e; /* Fond de cartes/boîtes sombre */
+  --contrast-color: #ffffff;
+  --box-shadow-color: rgba(255, 255, 255, 0.05); /* Ombre très légère */
+  --border-color-light: color-mix(in srgb, var(--default-color), transparent 85%);
+
+  /* Nav Menu Colors */
+  --nav-color: #e6e6e6;
+  --nav-hover-color: var(--accent-color);
+  --nav-mobile-background-color: #121212;
+  --nav-dropdown-background-color: #1e1e1e;
+  --nav-dropdown-color: #e6e6e6;
+  --nav-dropdown-hover-color: var(--accent-color);
+}
+
+/* Gestion des classes de fond spécifiques qui existent déjà dans votre thème */
+.light-background {
+  --background-color: #f9f9f9;
+  --surface-color: #ffffff;
+}
+
+body.dark-mode .light-background {
+  --background-color: #1e1e1e; /* Fond clair devient gris foncé en mode sombre */
+  --surface-color: #121212;
+}
+
+/* La classe dark-background est déjà gérée pour le mode sombre, pas besoin de la modifier. */
+/* ... (Reste de vos variables existantes : Smooth scroll) ... */
+
+/* ======================================================= */
+/* --- Style du Bouton de Bascule (Toggle Switch) --- */
+/* ======================================================= */
+
+.theme-switch-wrapper {
+  /* Positionnement fixe en haut à droite */
+  position: fixed;
+  top: 20px;
+  right: 60px; /* Décalage pour ne pas gêner le bouton de navigation mobile */
+  z-index: 9998; /* Juste en dessous du header-toggle (9999) */
+}
+
+@media (max-width: 1199px) {
+    /* Le bouton de navigation mobile prend le dessus sur petit écran */
+    .theme-switch-wrapper {
+        top: 60px;
+        right: 15px;
+    }
+}
+
+
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+  cursor: pointer;
+}
+
+.theme-switch input {
+  display: none; /* Cache la case à cocher native */
+}
+
+/* Le "curseur" du switch (le fond) */
+.slider {
+  background-color: var(--surface-color); 
+  border: 1px solid var(--border-color-light); /* Bordure légère */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  position: absolute;
+  transition: 0.4s;
+  box-shadow: 0 0 5px var(--box-shadow-color); /* Ombre héritée */
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+/* La poignée mobile du slider */
+.slider:before {
+  background-color: var(--accent-color);
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  width: 26px;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Position et style des icônes Soleil/Lune */
+.slider .light-icon,
+.slider .dark-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--default-color); 
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+.slider .light-icon {
+    left: 8px;
+    opacity: 1;
+}
+
+.slider .dark-icon {
+    right: 8px;
+    opacity: 0; /* Cachée en mode clair */
+}
+
+/* --- États du mode sombre (checked) --- */
+
+/* Appliquer les styles en mode "checked" (bouton activé = dark) */
+input:checked + .slider {
+    background-color: var(--surface-color); /* Le fond du switch reste le surface-color */
+}
+
+/* Déplacement de la poignée */
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Inversion des icônes */
+input:checked + .slider .light-icon {
+    opacity: 0;
+}
+
+input:checked + .slider .dark-icon {
+    opacity: 1;
+}
